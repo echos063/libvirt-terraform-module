@@ -1,0 +1,25 @@
+#cloud-config
+hostname: project-adm-server
+manage_etc_hosts: true
+package_update: true
+packages:
+  - vim
+
+users:
+  - name: deploy
+    passwd: ""
+    shell: /bin/bash
+    lock_passwd: false
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    ssh_authorized_keys:
+      - ssh-rsa
+
+write_files:
+  - path: /path/to/directory/CA.crt
+    content: |
+      -----BEGIN CERTIFICATE-----
+
+      -----END CERTIFICATE-----
+
+runcmd:
+  - update-ca-certificates
